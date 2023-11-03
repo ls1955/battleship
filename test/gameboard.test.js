@@ -57,3 +57,26 @@ test("return false if receive attack on an empty coordinate", () => {
 
     expect(result).toBeFalsy();
 });
+
+test("all ships is sunk when there is no ship", () => {
+    let gameboard = new Gameboard();
+
+    expect(gameboard.isAllShipSunk()).toBeTruthy();
+});
+
+test("all ships is not sunk when there is ship alive", () => {
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 1 });
+    gameboard.place({ ship, x: 0, y: 0 });
+
+    expect(gameboard.isAllShipSunk()).toBeFalsy();
+});
+
+test("all ships is sunk when no ship alive", () => {
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 1 });
+    gameboard.place({ ship, x: 0, y: 0 });
+    gameboard.receiveAttack({ x: 0, y: 0 });
+
+    expect(gameboard.isAllShipSunk()).toBeTruthy();
+});
