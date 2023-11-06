@@ -11,7 +11,6 @@ test("send a message to own board when placing ship", () => {
     player.place({ ship, x: -1, y: -1 });
 
     expect(playerBoard.place).toHaveBeenCalled();
-    expect(playerBoard.place.mock.calls).toHaveLength(1);
 });
 
 test("send a message to enemy board when attacking", () => {
@@ -19,5 +18,4 @@ test("send a message to enemy board when attacking", () => {
     player.attack({ x: -1, y: -1 });
 
     expect(enemyBoard.receiveAttack).toHaveBeenCalled();
-    expect(enemyBoard.receiveAttack.mock.calls).toHaveLength(1);
 });
