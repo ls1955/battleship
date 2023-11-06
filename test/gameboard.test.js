@@ -1,17 +1,17 @@
 import { Gameboard } from "../lib/gameboard";
 import { Ship } from "../lib/ship";
 
-test("has 10 rows, each row has 10 columns", () => {
+test("it has 10 rows, each row has 10 columns", () => {
     let gameboard = new Gameboard();
     expect(gameboard.board.length).toEqual(10);
 });
 
-test("has 0 missed shots at the beginning", () => {
+test("it has 0 missed shots at the beginning", () => {
     let gameboard = new Gameboard();
     expect(gameboard.missedShots).toEqual(0);
 });
 
-test("could place a ship on the board", () => {
+test("it could place a ship on the board", () => {
     let gameboard = new Gameboard();
     let ship = new Ship({ length: 1 });
     gameboard.place({ ship, x: 0, y: 0 });
@@ -25,7 +25,50 @@ test("could place a ship on the board", () => {
     }
 });
 
-test("could receive attack and transfer the hit to the ship when there is ship", () => {
+test("it could place a ship horizontally on board according to it length", () => {
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 10 });
+    gameboard.place({ ship, x: 0, y: 0 });
+
+    gameboard.board[0].forEach(slot => expect(slot).toBe(ship))
+});
+
+test("it return false if a ship is place on invalid coordinate", () => {
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 1 });
+
+    expect(gameboard.place({ ship, x: 0, y: 11 })).toBeFalsy();
+    expect(gameboard.place({ ship, x: 0, y: -1 })).toBeFalsy();
+    expect(gameboard.place({ ship, x: -1, y: 0 })).toBeFalsy();
+    expect(gameboard.place({ ship, x: 11, y: 0 })).toBeFalsy();
+});
+
+test("it did not place ship if it is place on invalid coordinate", () => {
+    let gameboard = new Gameboard()
+    let ship = new Ship({ length: 1 })
+    gameboard.place({ ship, x: 0, y: 11 })
+
+    gameboard.board.forEach(row => {
+        row.forEach(slot => expect(slot).not.toBe(ship))
+    })
+})
+
+test("it return false if a ship could not fit into the row", () => {
+    let gameboard = new Gameboard()
+    let ship = new Ship({length : 10})
+
+    expect(gameboard.place({ ship, x: 1, y: 0 })).toBeFalsy()
+})
+
+test("it did not place the ship if it could not fit into the row", () => {
+    let gameboard = new Gameboard()
+    let ship = new Ship({length: 10})
+    gameboard.place({ship, x:1, y:0})
+
+    gameboard.board[0].forEach(slot => expect(slot).not.toBe(ship))
+})
+
+test("it could receive attack and transfer the hit to the ship when there is ship", () => {
     let gameboard = new Gameboard();
     let ship = new Ship({ length: 1 });
     gameboard.place({ ship, x: 0, y: 0 });
@@ -35,14 +78,14 @@ test("could receive attack and transfer the hit to the ship when there is ship",
     expect(gameboard.missedShots).toEqual(0);
 });
 
-test("increment missedShots if receive attack on an empty coordinate", () => {
+test("it increment missedShots if receive attack on an empty coordinate", () => {
     let gameboard = new Gameboard();
     gameboard.receiveAttack({ x: 0, y: 0 });
 
     expect(gameboard.missedShots).toEqual(1);
 });
 
-test("return true if receive attack could transfer the hit to the ship", () => {
+test("it return true if receive attack could transfer the hit to the ship", () => {
     let gameboard = new Gameboard();
     let ship = new Ship({ length: 1 });
     gameboard.place({ ship, x: 0, y: 0 });
@@ -51,7 +94,7 @@ test("return true if receive attack could transfer the hit to the ship", () => {
     expect(result).toBeTruthy();
 });
 
-test("return false if receive attack on an empty coordinate", () => {
+test("it return false if receive attack on an empty coordinate", () => {
     let gameboard = new Gameboard();
     let result = gameboard.receiveAttack({ x: 0, y: 0 });
 
