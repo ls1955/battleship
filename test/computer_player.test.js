@@ -1,16 +1,19 @@
 import { ComputerPlayer } from "../lib/computer_player";
 import { Gameboard } from "../lib/gameboard";
 
+const ownBoard = new Gameboard();
+const enemyBoard = jest.createMockFromModule("../lib/gameboard");
+enemyBoard.receiveAttack = jest.fn();
+
 describe("ComputerPlayer", () => {
     describe("#nextAtkCoordinate", () => {
         it("does not repeat chosen attack coordinate", () => {
             let colSize = 10;
             let rowSize = 10;
 
-            let board = new Gameboard();
             let comp = new ComputerPlayer({
-                ownBoard: board,
-                otherBoard: board,
+                ownBoard,
+                enemyBoard,
             });
             let coordinates = new Set();
 
@@ -21,6 +24,18 @@ describe("ComputerPlayer", () => {
             }
 
             expect(coordinates.size).toEqual(colSize * rowSize);
+        });
+    });
+
+    describe("#attack", () => {
+        it("should send the message to attack enemy board", () => {
+            let comp = new ComputerPlayer({
+                ownBoard,
+                enemyBoard,
+            });
+            comp.attack();
+
+            expect(enemyBoard.receiveAttack).toHaveBeenCalled();
         });
     });
 });
