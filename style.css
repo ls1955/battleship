@@ -1,0 +1,20 @@
+.boards-container {
+    display: flex;
+}
+
+.board {
+    margin: 100px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    background-color: black;
+    border: 1px solid white;
+    width: 40px;
+    height: 40px;
+}
+
+/* TODO: Include hover event and pointer event for column */
