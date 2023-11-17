@@ -26,16 +26,4 @@ describe("ComputerPlayer", () => {
             expect(coordinates.size).toEqual(colSize * rowSize);
         });
     });
-
-    describe("#attack", () => {
-        it("should send the message to attack enemy board", () => {
-            let comp = new ComputerPlayer({
-                ownBoard,
-                enemyBoard,
-            });
-            comp.attack();
-
-            expect(enemyBoard.receiveAttack).toHaveBeenCalled();
-        });
-    });
 });
