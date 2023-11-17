@@ -17,11 +17,12 @@ test("it could place a ship on the board", () => {
     gameboard.place({ ship, x: 0, y: 0 });
 
     expect(gameboard.board[0][0]).toBe(ship);
-    for (let i = 0; i < gameboard.length; i++) {
-        for (let j = 0; j < GamepadButton[0].length; j++)
-            if (i === 0 && j === 0) continue;
+    for (let y = 0; y < gameboard.board.length; y++) {
+        for (let x = 0; x < gameboard.board[0].length; x++) {
+            if (x === 0 && y === 0) continue;
 
-        expect(gameboard.board[i][j]).not.toBe(ship);
+            expect(gameboard.board[y][x]).not.toBe(ship);
+        }
     }
 });
 
