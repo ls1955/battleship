@@ -32,3 +32,7 @@ body {
 .computer-board .column:not(.pressed):hover {
     background: rgb(200, 200, 200);
 }
+
+.human-board .column.ship {
+    background-color: purple;
+}
