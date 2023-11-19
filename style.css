@@ -11,6 +11,17 @@ h1 {
     justify-content: space-around;
 }
 
+.board-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+}
+
+.missed-counter {
+    font-size: 0.8rem;
+}
+
 .row {
     display: flex;
 }
