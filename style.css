@@ -2,12 +2,13 @@ body {
     background-color: rgb(250, 250, 250);
 }
 
-.boards-container {
-    display: flex;
+h1 {
+    text-align: center;
 }
 
-.board {
-    margin: 100px;
+.boards-container {
+    display: flex;
+    justify-content: space-around;
 }
 
 .row {
