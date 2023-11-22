@@ -33,10 +33,6 @@ h1 {
     height: 40px;
 }
 
-.column.hit {
-    background-color: red;
-}
-
 .column.pressed {
     background: rgb(180, 180, 180);
 }
@@ -47,4 +43,8 @@ h1 {
 
 .human-board .column.ship {
     background-color: purple;
+}
+
+.column.pressed.hit {
+    background-color: red;
 }
