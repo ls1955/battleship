@@ -31,7 +31,7 @@ test("it could place a ship horizontally on grid according to it length", () => 
     let ship = new Ship({ length: 10 });
     gameboard.place({ ship, x: 0, y: 0 });
 
-    gameboard.grid[0].forEach(slot => expect(slot).toBe(ship))
+    gameboard.grid[0].forEach((slot) => expect(slot).toBe(ship));
 });
 
 test("it return false if a ship is place on invalid coordinate", () => {
@@ -45,29 +45,29 @@ test("it return false if a ship is place on invalid coordinate", () => {
 });
 
 test("it did not place ship if it is place on invalid coordinate", () => {
-    let gameboard = new Gameboard()
-    let ship = new Ship({ length: 1 })
-    gameboard.place({ ship, x: 0, y: 11 })
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 1 });
+    gameboard.place({ ship, x: 0, y: 11 });
 
-    gameboard.grid.forEach(row => {
-        row.forEach(slot => expect(slot).not.toBe(ship))
-    })
-})
+    gameboard.grid.forEach((row) => {
+        row.forEach((slot) => expect(slot).not.toBe(ship));
+    });
+});
 
 test("it return false if a ship could not fit into the row", () => {
-    let gameboard = new Gameboard()
-    let ship = new Ship({length : 10})
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 10 });
 
-    expect(gameboard.place({ ship, x: 1, y: 0 })).toBeFalsy()
-})
+    expect(gameboard.place({ ship, x: 1, y: 0 })).toBeFalsy();
+});
 
 test("it did not place the ship if it could not fit into the row", () => {
-    let gameboard = new Gameboard()
-    let ship = new Ship({length: 10})
-    gameboard.place({ship, x:1, y:0})
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 10 });
+    gameboard.place({ ship, x: 1, y: 0 });
 
-    gameboard.grid[0].forEach(slot => expect(slot).not.toBe(ship))
-})
+    gameboard.grid[0].forEach((slot) => expect(slot).not.toBe(ship));
+});
 
 test("it could receive attack and transfer the hit to the ship when there is ship", () => {
     let gameboard = new Gameboard();
@@ -122,5 +122,16 @@ test("all ships is sunk when no ship alive", () => {
     gameboard.place({ ship, x: 0, y: 0 });
     gameboard.receiveAttack({ x: 0, y: 0 });
 
+    expect(gameboard.isAllShipSunk()).toBeTruthy();
+});
+
+test("it could clear the grid", () => {
+    let gameboard = new Gameboard();
+    let ship = new Ship({ length: 1 });
+
+    gameboard.place({ ship, x: 0, y: 0 });
+    expect(gameboard.isAllShipSunk()).toBeFalsy();
+
+    gameboard.clear();
     expect(gameboard.isAllShipSunk()).toBeTruthy();
 });
