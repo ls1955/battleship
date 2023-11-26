@@ -8,10 +8,12 @@ let compPlayer = new ComputerPlayer({
     ownBoard: compBoard,
     enemyBoard: humanBoard,
 });
+let shuffleBtn = document.querySelector(".shuffle-button");
 let controller = new BattleShipController({
     compPlayer,
     humanBoard,
     compBoard,
+    shuffleBtn,
 });
 
 controller.initialize();
