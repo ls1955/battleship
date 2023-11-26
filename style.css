@@ -1,5 +1,8 @@
 body {
     background-color: rgb(250, 250, 250);
+
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -47,4 +50,12 @@ h1 {
 
 .column.pressed.hit {
     background-color: red;
+}
+
+.shuffle-button {
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 5px;
+
+    align-self: center;
 }
