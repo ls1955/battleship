@@ -14,6 +14,13 @@ let compBrd = new Gameboard();
 humanBrd.dom = document.querySelector(".human-board");
 compBrd.dom = document.querySelector(".computer-board");
 
+let ships = shipLengths.map((length) => new Ship({ length }));
+humanBrd.shipyard = new Shipyard({ ships });
+// Even though Shipyard will create a shallow copy of ships, lets be cautious
+// by creating ships again because unexpected mutation is a giant potato.
+ships = shipLengths.map((length) => new Ship({ length }));
+compBrd.shipyard = new Shipyard({ ships });
+
 // Fills up the board with rows and columns in DOM...
 [humanBrd, compBrd].forEach((board) => {
     new BoardDOMFiller().fill({
@@ -23,22 +30,18 @@ compBrd.dom = document.querySelector(".computer-board");
     });
 });
 
-let ships = shipLengths.map((length) => new Ship({ length }));
-let humanShipyard = new Shipyard({ ships });
-
 // Setup various board events (human side)...
 let setter = new BoardEventSetter();
-setter.addPreviewShipEvent({ board: humanBrd, shipyard: humanShipyard });
-setter.addPlaceShipEvent({ board: humanBrd, shipyard: humanShipyard });
+setter.addPreviewShipEvent({ board: humanBrd });
+setter.addPlaceShipEvent({ board: humanBrd });
 
 // Computer player placing their ships...
 let comp = new ComputerPlayer({
     boardWidth: Gameboard.Width,
     boardHeight: Gameboard.Height,
 });
-let compShipyard = new Shipyard({ ships });
 let compController = new ComputerController({ computerPlayer: comp });
-compController.placeShips({ board: compBrd, shipyard: compShipyard });
+compController.placeShips({ board: compBrd });
 
 // TODO: Add human attack event
 // TODO: Perhaps have a BattleShip class that keep track of various game status?

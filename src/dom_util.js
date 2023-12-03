@@ -1,4 +1,4 @@
-import { Ship } from "./ship.js"
+import { Ship } from "./ship.js";
 
 // Returns columns (DOMs) inside the board (DOM) that are occupy by ship, if they exist.
 function getColumns({ board, ship, x, y }) {

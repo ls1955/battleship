@@ -7,8 +7,8 @@ export class ComputerController {
     }
 
     // Updates the CSS class of board after computer player placed its ships.
-    placeShips({ board, shipyard }) {
-        this.computerPlayer.placeShips({ board, shipyard: shipyard });
+    placeShips({ board }) {
+        this.computerPlayer.placeShips({ board });
         updateShipCSSKlass({ board });
     }
 }

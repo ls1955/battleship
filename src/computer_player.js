@@ -13,12 +13,12 @@ export class ComputerPlayer {
     // Regarding current implementation, it choose a row and a valid column randomly.
     // Since it currently will no repeat the row (even it there is enough space to fit
     // another ship), probably need to change the implementation later on...
-    placeShips({ shipyard, board }) {
+    placeShips({ board }) {
         const rowIndexes = [0, 1, 2, 3, 4, 5, 7, 8, 9];
 
-        while (!shipyard.isEmpty()) {
+        while (!board.shipyard.isEmpty()) {
             // TODO: Remove adjacent y to avoid putting next to each other?
-            let ship = shipyard.shift()
+            let ship = board.shipyard.shift();
             let i = this.randomIndex(rowIndexes);
             let y = rowIndexes.splice(i, 1);
             let x = Math.round(Math.random() * (10 - ship.length));

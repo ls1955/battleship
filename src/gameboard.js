@@ -5,13 +5,19 @@ export class Gameboard {
     constructor() {
         this.grid = [];
         this.missedShots = 0;
-        // The dom element that represent the board, should be set from outside
-        this.dom = null;
         this.placedShipCoordinates = new Set();
 
         for (let y = 0; y < Gameboard.Height; y++) {
             this.grid.push(Array.from({ length: Gameboard.Width }, () => null));
         }
+
+        // These instance variables will be set from outside, since it seems like JS does not
+        // support keyword arguments with default value, and author does not feel like using
+        // usual parameter mode.
+        // The dom element that represent the board
+        this.dom = null;
+        // The shipyard that holds the ship
+        this.shipyard = null;
     }
 
     place({ ship, x, y }) {
