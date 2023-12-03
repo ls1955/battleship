@@ -1,5 +1,5 @@
 export class BoardEventSetter {
-    setPreviewShipEvent({ board, shipyard }) {
+    addPreviewShipEvent({ board, shipyard }) {
         board.addEventListener("mouseover", (e) => {
             this.clearPreview({ board });
             this.addPreview({ board, shipyard, e });
@@ -40,24 +40,31 @@ export class BoardEventSetter {
         });
     }
 
-    setAddShipEvent({ board, shipyard }) {
+    addPutShipEvent({ board, shipyard }) {
         board.addEventListener("click", (e) => {
-            if (shipyard.isEmpty()) return;
-
-            let tile = e.target;
-            let x = +tile.dataset["x"];
-            let y = +tile.dataset["y"];
-            let ship = shipyard[0];
-
-            if (!board.isValidCoor({ x, y, ship })) return;
-
-            shipyard.shift();
-            for (let offset = 0; offset < ship.length; offset++) {
-            let currX = x + offset
-                board.shipCoordinates.push([currX, y + offset]);
-                this.getTile({ board, x: currX, y }).classList.add("ship");
-            }
+            this.putShip({ board, shipyard, e });
         });
+    }
+
+    // Puts the ship on the board (div) and update tiles classes.
+    // Do nothing if invalid coordinate or there is no ship to place.
+    putShip({ board, shipyard, e }) {
+        if (shipyard.isEmpty()) return;
+
+        let tile = e.target;
+        let x = +tile.dataset["x"];
+        let y = +tile.dataset["y"];
+        let ship = shipyard[0];
+
+        if (!board.isValidCoor({ x, y, ship })) return;
+
+        shipyard.shift();
+        for (let offset = 0; offset < ship.length; offset++) {
+            let currX = x + offset;
+            // NOTE: Should call the board public api...
+            board.shipCoordinates.push([currX, y + offset]);
+            this.getTile({ board, x: currX, y }).classList.add("ship");
+        }
     }
 
     // A helper method that returns the tile at (x, y) from board.
@@ -65,4 +72,7 @@ export class BoardEventSetter {
     getTile({ board, x, y }) {
         return board.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
     }
+
+    // TODO: addHumanAttackEvent;
+    // TODO: addComputerAttackEvent
 }
