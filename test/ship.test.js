@@ -1,7 +1,7 @@
 import { Ship } from "../src/ship";
 
 let ship = null;
-beforeAll(() => {
+beforeEach(() => {
     ship = new Ship({ length: 5 });
 });
 
