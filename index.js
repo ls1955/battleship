@@ -1,19 +1,15 @@
-import { BattleShipController } from "./lib/battleship_controller.js";
-import { Gameboard } from "./lib/gameboard.js";
-import { ComputerPlayer } from "./lib/computer_player.js";
+import { Gameboard } from "./src/gameboard.js";
+import { BoardDOMFiller } from "./src/board_dom_filler.js";
 
-let humanBoard = new Gameboard();
-let compBoard = new Gameboard();
-let compPlayer = new ComputerPlayer({
-    ownBoard: compBoard,
-    enemyBoard: humanBoard,
-});
-let shuffleBtn = document.querySelector(".shuffle-button");
-let controller = new BattleShipController({
-    compPlayer,
-    humanBoard,
-    compBoard,
-    shuffleBtn,
-});
+let humanBrd = new Gameboard();
+let compBrd = new Gameboard();
+humanBrd.dom = document.querySelector(".human-board");
+compBrd.dom = document.querySelector(".computer-board");
 
-controller.initialize();
+[humanBrd, compBrd].forEach((board) => {
+    new BoardDOMFiller().fill({
+        board,
+        width: Gameboard.Width,
+        height: Gameboard.Height,
+    });
+});
