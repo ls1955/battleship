@@ -1,43 +1,61 @@
 export class BoardEventSetter {
+    // Adds the preview ship event to the board. Should only call this function for each
+    // board once.
     addPreviewShipEvent({ board, shipyard }) {
-        board.addEventListener("mouseover", (e) => {
+        board.dom.addEventListener("mouseover", (e) => {
             this.clearPreview({ board });
             this.addPreview({ board, shipyard, e });
         });
 
-        board.addEventListener("mouseleave", () => {
+        board.dom.addEventListener("mouseleave", () => {
             this.clearPreview({ board });
         });
     }
 
-    // Add preview-related class to the affected tile inside the board.
+    // Removes all the preview-related class from columns inside the board.
+    clearPreview({ board }) {
+        board.dom.querySelectorAll(".column").forEach((t) => {
+            t.classList.remove("preview-valid", "preview-invalid");
+        });
+    }
+
+    // Adds preview-related class to the affected columns inside the board.
     addPreview({ board, shipyard, e }) {
         if (shipyard.isEmpty()) return;
 
-        let tile = e.target;
-        let x = +tile.dataset["x"];
-        let y = +tile.dataset["y"];
+        let col = e.target;
+        let x = +col.dataset["x"];
+        let y = +col.dataset["y"];
         let ship = shipyard.ships[0];
-        let tiles = getShipTiles({ ship, x, y });
+        let cols = this.getColumns({ board, ship, x, y });
 
         if (board.canPlace({ ship, x, y })) {
-            tiles.forEach((tile) => {
-                tile.classList.add("preview-valid");
-                tile.classList.remove("preview-invalid");
+            cols.forEach((c) => {
+                c.classList.add("preview-valid");
+                c.classList.remove("preview-invalid");
             });
         } else {
-            tiles.forEach((tile) => {
-                tile.classList.add("preview-invalid");
-                tile.classList.remove("preview-valid");
+            cols.forEach((c) => {
+                c.classList.add("preview-invalid");
+                c.classList.remove("preview-valid");
             });
         }
     }
 
-    // Remove all the preview-related class from tiles inside the board.
-    clearPreview({ board }) {
-        board.querySelectorAll(".tiles").forEach((t) => {
-            t.classList.remove("preview-valid", "preview-invalid");
-        });
+    // Returns columns (DOM) from the board, if they exist.
+    getColumns({ board, ship, x, y }) {
+        const result = [];
+
+        for (let offset = 0; offset < ship.length; offset++) {
+            let currX = x + offset;
+            let column = board.dom.querySelector(
+                `.column[data-x="${currX}"][data-y="${y}"]`
+            );
+
+            if (column != null) result.push(column);
+        }
+
+        return result;
     }
 
     addPlaceShipEvent({ board, shipyard }) {
@@ -59,7 +77,7 @@ export class BoardEventSetter {
         if (!board.canPlace({ ship, x, y })) return;
 
         shipyard.shift();
-        board.place({ship, x, y})
+        board.place({ ship, x, y });
         for (let offset = 0; offset < ship.length; offset++) {
             this.getTile({ board, x: x + offset, y }).classList.add("ship");
         }
