@@ -59,34 +59,27 @@ export class BoardEventSetter {
     }
 
     addPlaceShipEvent({ board, shipyard }) {
-        board.addEventListener("click", (e) => {
+        board.dom.addEventListener("click", (e) => {
             this.placeShip({ board, shipyard, e });
         });
     }
 
-    // Puts the ship on the board (div) and update tiles classes.
-    // Do nothing if invalid coordinate or there is no ship to place.
+    // Places the ship on the board (div) and update tiles classes. Do nothing if the
+    // ship could not be place.
     placeShip({ board, shipyard, e }) {
         if (shipyard.isEmpty()) return;
 
-        let tile = e.target;
-        let x = +tile.dataset["x"];
-        let y = +tile.dataset["y"];
-        let ship = shipyard[0];
+        let col = e.target;
+        let x = +col.dataset["x"];
+        let y = +col.dataset["y"];
+        let ship = shipyard.ships[0];
 
         if (!board.canPlace({ ship, x, y })) return;
 
         shipyard.shift();
         board.place({ ship, x, y });
-        for (let offset = 0; offset < ship.length; offset++) {
-            this.getTile({ board, x: x + offset, y }).classList.add("ship");
-        }
-    }
-
-    // A helper method that returns the tile at (x, y) from board.
-    // TODO: Perhaps move it to another module?
-    getTile({ board, x, y }) {
-        return board.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
+        let cols = this.getColumns({board, ship, x, y})
+        cols.forEach((c) => c.classList.add("ship"))
     }
 
     // TODO: addHumanAttackEvent;
