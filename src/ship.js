@@ -1,6 +1,4 @@
 export class Ship {
-    length = 0;
-
     constructor({ length }) {
         this.length = length;
         this.receivedHitAmount = 0;
