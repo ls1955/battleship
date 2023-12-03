@@ -19,7 +19,5 @@ test("a shipyard is empty when it has no ship", () => {
 });
 
 test("a shipyard could shift the first ship it hold", () => {
-    ships.forEach((ship) => {
-        expect(shipyard.shift()).toEqual(ship)
-    })
-})
+    ships.forEach((s) => expect(shipyard.shift()).toEqual(s));
+});

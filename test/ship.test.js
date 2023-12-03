@@ -14,15 +14,11 @@ test("a new ship is not sunk", () => {
 });
 
 test("a ship is not sunk if received hit amount is smaller than its length", () => {
-    for (let i = 0; i < ship.length - 1; i++) {
-        ship.receiveHit();
-    }
+    for (let i = 0; i < ship.length - 1; i++) ship.receiveHit();
     expect(ship.isSunk()).toBeFalsy();
 });
 
 test("a ship is sunk if received hit amount is larger or equal its length", () => {
-    for (let i = 0; i < ship.length; i++) {
-        ship.receiveHit();
-    }
+    for (let i = 0; i < ship.length; i++) ship.receiveHit();
     expect(ship.isSunk()).toBeTruthy();
 });
