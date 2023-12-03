@@ -1,3 +1,5 @@
+import { getColumns } from "./dom_util.js";
+
 export class BoardEventSetter {
     // Adds the preview ship event to the board. Should only call this function for each
     // board once.
@@ -27,7 +29,7 @@ export class BoardEventSetter {
         let x = +col.dataset["x"];
         let y = +col.dataset["y"];
         let ship = shipyard.ships[0];
-        let cols = this.getColumns({ board, ship, x, y });
+        let cols = getColumns({ board, ship, x, y });
 
         if (board.canPlace({ ship, x, y })) {
             cols.forEach((c) => {
@@ -40,23 +42,6 @@ export class BoardEventSetter {
                 c.classList.remove("preview-valid");
             });
         }
-    }
-
-    // Returns columns that are occupy by ship, if they exist.
-    getColumns({ board, ship, x, y }) {
-        const result = [];
-
-        for (let offset = 0; offset < ship.length; offset++) {
-            let c = this.getColumn({board, x: x + offset, y})
-            if (c != null) result.push(c);
-        }
-
-        return result;
-    }
-
-    // Returns column at (x, y) coordinate inside the board, or undefined if it does not exist.
-    getColumn({ board, x, y }) {
-        return board.dom.querySelector(`.column[data-x="${x}"][data-y="${y}"]`);
     }
 
     addPlaceShipEvent({ board, shipyard }) {
@@ -79,7 +64,7 @@ export class BoardEventSetter {
 
         shipyard.shift();
         board.place({ ship, x, y });
-        let cols = this.getColumns({ board, ship, x, y });
+        let cols = getColumns({ board, ship, x, y });
         cols.forEach((c) => c.classList.add("ship"));
     }
 
