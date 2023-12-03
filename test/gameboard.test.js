@@ -100,8 +100,8 @@ describe("Gameboard", () => {
 
         it("cannot place a ship that is overlapping with other ship", () => {
             let [x, y, ship] = [0, 0, new Ship({ length: 1 })];
-            board.place({ship, x, y})
-            expect(board.canPlace({ship, x, y})).toBeFalsy()
-        })
+            board.place({ ship, x, y });
+            expect(board.canPlace({ ship, x, y })).toBeFalsy();
+        });
     });
 });

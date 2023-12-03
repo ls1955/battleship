@@ -60,7 +60,7 @@ export class Gameboard {
 
     // Return true if there is no ship or all the ship is sunk.
     isAllShipSunk() {
-        return this.grid.flat().every((slot) => slot == null || slot.isSunk());
+        return this.grid.every((r) => r.every((c) => c == null || c.isSunk()));
     }
 
     // Clear the grid, effectively setting every slot to null.
