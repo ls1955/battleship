@@ -1,4 +1,4 @@
-import { Ship } from "../lib/ship";
+import { Ship } from "../src/ship";
 
 test("a ship could be given a length", () => {
     let ship = new Ship({ length: 5 });

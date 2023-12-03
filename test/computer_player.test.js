@@ -1,8 +1,8 @@
-import { ComputerPlayer } from "../lib/computer_player";
-import { Gameboard } from "../lib/gameboard";
+import { ComputerPlayer } from "../src/computer_player";
+import { Gameboard } from "../src/gameboard";
 
 const ownBoard = new Gameboard();
-const enemyBoard = jest.createMockFromModule("../lib/gameboard");
+const enemyBoard = jest.createMockFromModule("../src/gameboard");
 enemyBoard.receiveAttack = jest.fn();
 
 describe("ComputerPlayer", () => {

@@ -1,5 +1,5 @@
-import { Gameboard } from "../lib/gameboard";
-import { Ship } from "../lib/ship";
+import { Gameboard } from "../src/gameboard";
+import { Ship } from "../src/ship";
 
 test("it has 10 rows, each row has 10 columns", () => {
     let gameboard = new Gameboard();
