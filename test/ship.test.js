@@ -5,7 +5,7 @@ beforeAll(() => {
     ship = new Ship({ length: 5 });
 });
 
-test("a ship could be given a length", () => {
+test("a ship know its length", () => {
     expect(ship.length).toEqual(5);
 });
 
