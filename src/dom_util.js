@@ -1,5 +1,24 @@
 import { Ship } from "./ship.js";
 
+// Removes all the preview-related class from columns inside the board.
+function clearPreviewCSSKlass({ board }) {
+    board.dom.querySelectorAll(".column").forEach((c) => {
+        c.classList.remove("preview-valid", "preview-invalid");
+    });
+}
+
+// Slaps on .preview-valid class and remove .preview-invalid class from column.
+function setPreviewValidCSSKlass({ column }) {
+    column.classList.add("preview-valid");
+    column.classList.remove("preview-invalid");
+}
+
+// Slaps on .preview-invalid class and remove .preview-valid class from column.
+function setPreviewInvalidCSSKlass({ column }) {
+    column.classList.add("preview-invalid");
+    column.classList.remove("preview-valid");
+}
+
 // Returns columns (DOMs) inside the board (DOM) that are occupy by ship, if they exist.
 function getColumns({ board, ship, x, y }) {
     const result = [];
@@ -31,4 +50,11 @@ function updateShipCSSKlass({ board }) {
     });
 }
 
-export { getColumns, getColumn, updateShipCSSKlass };
+export {
+    clearPreviewCSSKlass,
+    getColumns,
+    getColumn,
+    setPreviewValidCSSKlass,
+    setPreviewInvalidCSSKlass,
+    updateShipCSSKlass,
+};

@@ -1,22 +1,21 @@
-import { getColumns } from "./dom_util.js";
+import {
+    clearPreviewCSSKlass,
+    getColumns,
+    setPreviewInvalidCSSKlass,
+    setPreviewValidCSSKlass,
+} from "./dom_util.js";
 
 export class BoardEventSetter {
     // Adds the preview ship event to the board. Should only call this function for each
     // board once.
     addPreviewShipEvent({ board }) {
         board.dom.addEventListener("mouseover", (e) => {
-            this.clearPreview({ board });
+            clearPreviewCSSKlass({ board });
             this.addPreview({ board, e });
         });
 
-        board.dom.addEventListener("mouseleave", () => this.clearPreview({ board }));
-    }
-
-    // EXTRACT_ME
-    // Removes all the preview-related class from columns inside the board.
-    clearPreview({ board }) {
-        board.dom.querySelectorAll(".column").forEach((t) => {
-            t.classList.remove("preview-valid", "preview-invalid");
+        board.dom.addEventListener("mouseleave", () => {
+            clearPreviewCSSKlass({ board });
         });
     }
 
@@ -30,16 +29,13 @@ export class BoardEventSetter {
         let ship = board.shipyard.ships[0];
         let cols = getColumns({ board, ship, x, y });
 
-        // EXTRACT_ME
         if (board.canPlace({ ship, x, y })) {
             cols.forEach((c) => {
-                c.classList.add("preview-valid");
-                c.classList.remove("preview-invalid");
+                setPreviewValidCSSKlass({ column: c });
             });
         } else {
             cols.forEach((c) => {
-                c.classList.add("preview-invalid");
-                c.classList.remove("preview-valid");
+                setPreviewInvalidCSSKlass({ column: c });
             });
         }
     }
