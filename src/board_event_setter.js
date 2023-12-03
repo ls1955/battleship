@@ -3,6 +3,7 @@ import {
     getColumns,
     setPreviewInvalidCSSKlass,
     setPreviewValidCSSKlass,
+    updateShipCSSKlass,
 } from "./dom_util.js";
 
 export class BoardEventSetter {
@@ -60,8 +61,7 @@ export class BoardEventSetter {
 
         board.shipyard.shift();
         board.place({ ship, x, y });
-        let cols = getColumns({ board, ship, x, y });
-        cols.forEach((c) => c.classList.add("ship"));
+        updateShipCSSKlass({ board });
     }
 
     // TODO: addHumanAttackEvent;
