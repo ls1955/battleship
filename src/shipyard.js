@@ -1,6 +1,6 @@
 export class Shipyard {
-    constructor({ships}) {
-        this.ships = [...ships]
+    constructor({ ships }) {
+        this.ships = [...ships];
     }
 
     shift() {
