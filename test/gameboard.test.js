@@ -86,4 +86,22 @@ describe("Gameboard", () => {
             expect(board.isAllShipSunk()).toBeTruthy();
         });
     });
+
+    describe("#canPlace", () => {
+        it("can place a ship at unoccupied space", () => {
+            let ship = new Ship({ length: 1 });
+            expect(board.canPlace({ ship, x: 0, y: 0 })).toBeTruthy();
+        });
+
+        it("cannot place a ship that could not fit into the row", () => {
+            let ship = new Ship({ length: 11 });
+            expect(board.canPlace({ ship, x: 0, y: 0 })).toBeFalsy();
+        });
+
+        it("cannot place a ship that is overlapping with other ship", () => {
+            let [x, y, ship] = [0, 0, new Ship({ length: 1 })];
+            board.place({ship, x, y})
+            expect(board.canPlace({ship, x, y})).toBeFalsy()
+        })
+    });
 });
