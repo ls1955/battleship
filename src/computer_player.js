@@ -1,21 +1,18 @@
 export class ComputerPlayer {
-    ownBoard = null;
-    enemyBoard = null;
-
-    constructor({ ownBoard, enemyBoard }) {
-        this.ownBoard = ownBoard;
-        // CHECK: Looks like we don't need the enemyBoard at all
-        this.enemyBoard = enemyBoard;
+    constructor({ boardWidth, boardHeight }) {
         this.atkCoordinates = [];
 
-        for (let y = 0; y < this.ownBoard.grid.length; y++) {
-            for (let x = 0; x < this.ownBoard.grid[0].length; x++) {
+        for (let y = 0; y < boardHeight; y++) {
+            for (let x = 0; x < boardWidth; x++) {
                 this.atkCoordinates.push([x, y]);
             }
         }
     }
 
-    // Place the ships randomly on the board
+    // Places the ships randomly on the board.
+    // Regarding current implementation, it choose a row and a valid column randomly.
+    // Since it currently will no repeat the row (even it there is enough space to fit
+    // another ship), probably need to change the implementation later on...
     place({ ships, board }) {
         const yCands = [0, 1, 2, 3, 4, 5, 7, 8, 9];
 
@@ -29,13 +26,14 @@ export class ComputerPlayer {
         });
     }
 
-    // Return a random coordinate in [x, y] form, will never repeat chosen coordinate
+    // Returns a random coordinate in [x, y] form, will never repeat chosen coordinate.
     nextAtkCoordinate() {
         let randomIndex = this.randomIndex(this.atkCoordinates);
         return this.atkCoordinates.splice(randomIndex, 1)[0];
     }
 
-    randomIndex(array) {
-        return Math.floor(Math.random() * array.length);
+    // Returns a random index from *ary*, should be use internally.
+    randomIndex(ary) {
+        return Math.floor(Math.random() * ary.length);
     }
 }
