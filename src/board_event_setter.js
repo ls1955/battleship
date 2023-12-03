@@ -20,7 +20,7 @@ export class BoardEventSetter {
         let ship = shipyard.ships[0];
         let tiles = getShipTiles({ ship, x, y });
 
-        if (board.isValidCoor({ x, y, ship })) {
+        if (board.canPlace({ ship, x, y })) {
             tiles.forEach((tile) => {
                 tile.classList.add("preview-valid");
                 tile.classList.remove("preview-invalid");
@@ -40,15 +40,15 @@ export class BoardEventSetter {
         });
     }
 
-    addPutShipEvent({ board, shipyard }) {
+    addPlaceShipEvent({ board, shipyard }) {
         board.addEventListener("click", (e) => {
-            this.putShip({ board, shipyard, e });
+            this.placeShip({ board, shipyard, e });
         });
     }
 
     // Puts the ship on the board (div) and update tiles classes.
     // Do nothing if invalid coordinate or there is no ship to place.
-    putShip({ board, shipyard, e }) {
+    placeShip({ board, shipyard, e }) {
         if (shipyard.isEmpty()) return;
 
         let tile = e.target;
@@ -56,14 +56,12 @@ export class BoardEventSetter {
         let y = +tile.dataset["y"];
         let ship = shipyard[0];
 
-        if (!board.isValidCoor({ x, y, ship })) return;
+        if (!board.canPlace({ ship, x, y })) return;
 
         shipyard.shift();
+        board.place({ship, x, y})
         for (let offset = 0; offset < ship.length; offset++) {
-            let currX = x + offset;
-            // NOTE: Should call the board public api...
-            board.shipCoordinates.push([currX, y + offset]);
-            this.getTile({ board, x: currX, y }).classList.add("ship");
+            this.getTile({ board, x: x + offset, y }).classList.add("ship");
         }
     }
 
