@@ -31,11 +31,15 @@ body {
     height: 40px;
 }
 
-.column.preview-valid {
+.human-board .column.ship {
+    background-color: rgb(110, 110, 110);
+}
+
+.human-board .column.preview-valid {
     background-color: rgb(150, 150, 150);
 }
 
-.column.preview-invalid {
+.human-board .column.preview-invalid {
     background-color: rgb(150, 0, 0);
 }
 
@@ -45,10 +49,6 @@ body {
 
 .computer-board .column:not(.pressed):hover {
     background: rgb(200, 200, 200);
-}
-
-.human-board .column.ship {
-    background-color: purple;
 }
 
 .column.pressed.hit {
