@@ -73,4 +73,10 @@ export class Util {
             });
         });
     }
+
+    static incrementMissedCount({ board }) {
+        // Select the counter that is located under same parent
+        const counter = board.dom.parentNode.querySelector(".missed-counter");
+        counter.textContent = `Missed: ${board.missedShots}`;
+    }
 }
