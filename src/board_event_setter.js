@@ -18,9 +18,7 @@ export class BoardEventSetter {
     addPreview({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let col = e.target;
-        let x = +col.dataset["x"];
-        let y = +col.dataset["y"];
+        let { x, y } = Util.extractParams({event: e})
         let ship = board.shipyard.ships[0];
         let cols = Util.getColumns({ board, ship, x, y });
 
@@ -46,9 +44,7 @@ export class BoardEventSetter {
     placeShip({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let col = e.target;
-        let x = +col.dataset["x"];
-        let y = +col.dataset["y"];
+        let {x,y} = Util.extractParams({event:e})
         let ship = board.shipyard.ships[0];
 
         if (!board.canPlace({ ship, x, y })) return;
@@ -57,6 +53,16 @@ export class BoardEventSetter {
         board.place({ ship, x, y });
         Util.updateShipCSS({ board });
     }
+
+    // WORK_ON_PROGRESS
+    // addReceiveAttackEvent({ board, opponentBoard }) {
+    //     board.dom.addEventListener("click", (e) => {
+    //         // Opponent hasn't place all their ships, game hasn't begin
+    //         if (!opponentBoard.shipyard.isEmpty()) return;
+
+    //         let col = e.target;
+    //     });
+    // }
 
     // TODO: addHumanAttackEvent;
     // TODO: addComputerAttackEvent

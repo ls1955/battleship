@@ -57,6 +57,15 @@ export class Util {
         column.classList.remove("preview-valid");
     }
 
+    // A helper method that extract column, x and y coordinate from click event
+    static extractParams({ event }) {
+        let column = event.target;
+        let x = +column.dataset["x"];
+        let y = +column.dataset["y"];
+
+        return { column, x, y };
+    }
+
     // Sets columns' CSS (DOMs) in board as ship if occupy by ship.
     static updateShipCSS({ board }) {
         board.grid.forEach((row, y) => {
