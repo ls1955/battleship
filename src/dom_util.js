@@ -74,10 +74,10 @@ export class Util {
         });
     }
 
-    // Increments the missed count counter that have same parent with board DOM.
+    // Increment the missed count counter that share same parent with board (DOM).
     static incrementMissedCount({ board }) {
-        // Select the counter that is located under same parent
         const counter = board.dom.parentNode.querySelector(".missed-counter");
-        counter.textContent = `Missed: ${board.missedShots}`;
+        counter.count = (counter.count || 0) + 1;
+        counter.textContent = `Missed: ${counter.count}`;
     }
 }
