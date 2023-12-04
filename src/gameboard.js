@@ -6,6 +6,7 @@ export class Gameboard {
         this.grid = [];
         this.missedShots = 0;
         this.placedShipCoordinates = new Set();
+        this.attackedCoors = new Set();
 
         for (let y = 0; y < Gameboard.Height; y++) {
             this.grid.push(Array.from({ length: Gameboard.Width }, () => null));
@@ -14,9 +15,8 @@ export class Gameboard {
         // These instance variables will be set from outside, since it seems like JS does not
         // support keyword arguments with default value, and author does not feel like using
         // usual parameter mode.
-        // The dom element that represent the board
         this.dom = null;
-        // The shipyard that holds the ship
+        // The shipyard that holds the ships
         this.shipyard = null;
     }
 
@@ -52,9 +52,12 @@ export class Gameboard {
         return false;
     }
 
-    // Returns false and increment missed shots if the attack missed, else delegate the attack
-    // and return true.
+    // Returns false and increment missed shots if the attack failed, else delegate the attack
+    // to ship and return true.
     receiveAttack({ x, y }) {
+        if (this.hadAttack({ x, y })) return false;
+
+        this.attackedCoors.add([x, y].join());
         if (this.grid[y][x] == null) {
             this.missedShots++;
             return false;
@@ -62,6 +65,11 @@ export class Gameboard {
 
         this.grid[y][x].receiveHit();
         return true;
+    }
+
+    // Return true if this coordinate had been attacked before, else false.
+    hadAttack({ x, y }) {
+        return this.attackedCoors.has([x, y].join());
     }
 
     // Return true if there is no ship or all the ship is sunk.
