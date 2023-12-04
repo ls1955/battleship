@@ -1,22 +1,16 @@
-import {
-    clearPreviewCSSKlass,
-    getColumns,
-    setPreviewInvalidCSSKlass,
-    setPreviewValidCSSKlass,
-    updateShipCSSKlass,
-} from "./dom_util.js";
+import { Util } from "./dom_util.js";
 
 export class BoardEventSetter {
     // Adds the preview ship event to the board. Should only call this function for each
     // board once.
     addPreviewShipEvent({ board }) {
         board.dom.addEventListener("mouseover", (e) => {
-            clearPreviewCSSKlass({ board });
+            Util.clearPreviewCSS({ board });
             this.addPreview({ board, e });
         });
 
         board.dom.addEventListener("mouseleave", () => {
-            clearPreviewCSSKlass({ board });
+            Util.clearPreviewCSS({ board });
         });
     }
 
@@ -28,15 +22,15 @@ export class BoardEventSetter {
         let x = +col.dataset["x"];
         let y = +col.dataset["y"];
         let ship = board.shipyard.ships[0];
-        let cols = getColumns({ board, ship, x, y });
+        let cols = Util.getColumns({ board, ship, x, y });
 
         if (board.canPlace({ ship, x, y })) {
             cols.forEach((c) => {
-                setPreviewValidCSSKlass({ column: c });
+                Util.setPreviewValidCSS({ column: c });
             });
         } else {
             cols.forEach((c) => {
-                setPreviewInvalidCSSKlass({ column: c });
+                Util.setPreviewInvalidCSS({ column: c });
             });
         }
     }
@@ -61,7 +55,7 @@ export class BoardEventSetter {
 
         board.shipyard.shift();
         board.place({ ship, x, y });
-        updateShipCSSKlass({ board });
+        Util.updateShipCSS({ board });
     }
 
     // TODO: addHumanAttackEvent;

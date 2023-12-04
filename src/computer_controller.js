@@ -1,4 +1,4 @@
-import { updateShipCSSKlass } from "./dom_util.js";
+import { Util } from "./dom_util.js";
 
 // The person in charge between the computer player and the DOM.
 export class ComputerController {
@@ -9,6 +9,6 @@ export class ComputerController {
     // Updates the CSS class of board after computer player placed its ships.
     placeShips({ board }) {
         this.computerPlayer.placeShips({ board });
-        updateShipCSSKlass({ board });
+        Util.updateShipCSS({ board });
     }
 }
