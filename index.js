@@ -1,10 +1,10 @@
 import { ComputerPlayer } from "./src/computer_player.js";
 import { ComputerController } from "./src/computer_controller.js";
 import { Gameboard } from "./src/gameboard.js";
-import { BoardDOMFiller } from "./src/board_dom_filler.js";
 import { BoardEventSetter } from "./src/board_event_setter.js";
 import { Shipyard } from "./src/shipyard.js";
 import { Ship } from "./src/ship.js";
+import { Util } from "./src/dom_util.js";
 
 // Hardcode the ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];
@@ -21,21 +21,10 @@ humanBrd.shipyard = new Shipyard({ ships });
 ships = shipLengths.map((length) => new Ship({ length }));
 compBrd.shipyard = new Shipyard({ ships });
 
-// Fills up the board with rows and columns in DOM...
-[humanBrd, compBrd].forEach((board) => {
-    new BoardDOMFiller().fill({
-        board,
-        width: Gameboard.Width,
-        height: Gameboard.Height,
-    });
-});
+// Populate the boards with rows and columns in DOM...
+[humanBrd, compBrd].forEach((board) => Util.populate({ board }));
 
-// Setup various board events (human side)...
-let setter = new BoardEventSetter();
-setter.addPreviewShipEvent({ board: humanBrd });
-setter.addPlaceShipEvent({ board: humanBrd });
-
-// Computer player placing their ships...
+// Let computer player place their ships...
 let comp = new ComputerPlayer({
     boardWidth: Gameboard.Width,
     boardHeight: Gameboard.Height,
@@ -43,5 +32,11 @@ let comp = new ComputerPlayer({
 let compController = new ComputerController({ computerPlayer: comp });
 compController.placeShips({ board: compBrd });
 
-// TODO: Add human attack event
+// Setup various board events (human side)...
+let setter = new BoardEventSetter();
+setter.addPreviewShipEvent({ board: humanBrd });
+setter.addPlaceShipEvent({ board: humanBrd });
+
+// TODO: Add human attack event (that probably instruct computer player to attack immediately
+// afterward?)
 // TODO: Perhaps have a BattleShip class that keep track of various game status?

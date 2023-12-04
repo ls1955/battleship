@@ -1,7 +1,25 @@
+import { Gameboard } from "./gameboard.js";
 import { Ship } from "./ship.js";
 
 // A collections of static methods that deal with DOM element and CSS.
 export class Util {
+    // Populates the board (DOM) with rows and columns (DOMs).
+    static populate({ board }) {
+        for (let y = 0; y < Gameboard.Height; y++) {
+            let row = document.createElement("div");
+            row.classList.add("row");
+            board.dom.appendChild(row);
+
+            for (let x = 0; x < Gameboard.Width; x++) {
+                let col = document.createElement("div");
+                col.dataset["x"] = x;
+                col.dataset["y"] = y;
+                col.classList.add("column");
+                row.appendChild(col);
+            }
+        }
+    }
+
     // Returns columns (DOMs) inside the board (DOM) that are occupy by ship, if they exist.
     static getColumns({ board, ship, x, y }) {
         const result = [];
