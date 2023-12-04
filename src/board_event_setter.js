@@ -71,13 +71,12 @@ export class BoardEventSetter {
 
             if (board.receiveAttack({ x, y })) {
                 Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
+                // Should let player keep on attacking...
             } else {
                 Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
-                // Util.incrementMissedCount({board})
+                Util.incrementMissedCount({ board });
+                // TODO: Let the computer player attack?
             }
         });
     }
-
-    // TODO: addHumanAttackEvent;
-    // TODO: addComputerAttackEvent
 }
