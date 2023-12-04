@@ -1,8 +1,7 @@
 import { Util } from "./dom_util.js";
 
 export class BoardEventSetter {
-    // Adds the preview ship event to the board. Should only call this function for each
-    // board once.
+    // Adds the preview ship event to the board.
     addPreviewShipEvent({ board }) {
         board.dom.addEventListener("mouseover", (e) => {
             Util.clearPreviewCSS({ board });
@@ -41,6 +40,7 @@ export class BoardEventSetter {
         }
     }
 
+    // Adds the place ship event to the board.
     addPlaceShipEvent({ board }) {
         board.dom.addEventListener("click", (e) => {
             this.placeShip({ board, e });
@@ -62,6 +62,8 @@ export class BoardEventSetter {
         Util.updateShipCSS({ board });
     }
 
+    // Adds receive attack event to the board.
+    // TODO: Include a computer controller that attack the opponentBoard.
     addReceiveAttackEvent({ board, opponentBoard }) {
         board.dom.addEventListener("click", (e) => {
             // Opponent hasn't place all their ships, game hasn't begin
