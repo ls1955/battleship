@@ -21,6 +21,7 @@ compBrd.dom = document.querySelector(".computer-board");
 humanBrd.name = "Human";
 compBrd.name = "Computer";
 
+// Sets shipyard for both board, shipyard holds the ships that will be place on the board.
 let ships = shipLengths.map((length) => new Ship({ length }));
 humanBrd.shipyard = new Shipyard({ ships });
 // Even though Shipyard will create a shallow copy of ships, lets be cautious
@@ -39,7 +40,7 @@ let comp = new ComputerPlayer({
 let compController = new ComputerController({ computerPlayer: comp });
 compController.placeShips({ board: compBrd });
 
-// Setup various board events (human side)...
+// Setup various board events...
 BoardEvent.addPreviewShipEvent({ board: humanBrd });
 BoardEvent.addPlaceShipEvent({ board: humanBrd });
 BoardEvent.addReceiveAttackEvent({
