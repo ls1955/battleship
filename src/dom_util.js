@@ -45,16 +45,11 @@ export class Util {
         });
     }
 
-    // Sets column (DOM)'s CSS as valid preview.
-    static setPreviewValidCSS({ column }) {
-        column.classList.add("preview-valid");
-        column.classList.remove("preview-invalid");
-    }
-
-    // Sets column (DOM)'s CSS as invalid preview.
-    static setPreviewInvalidCSS({ column }) {
-        column.classList.add("preview-invalid");
-        column.classList.remove("preview-valid");
+    // Adds and removes CSS classes via two respectives array of tokens (classes).
+    // Pass in empty array if doesn't wanna add or removes classes.
+    static setCSSKlasses({ column, adds, removes }) {
+        column.classList.add(...adds);
+        column.classList.remove(...removes);
     }
 
     // A helper method that extract column, x and y coordinate from click event

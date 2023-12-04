@@ -18,17 +18,25 @@ export class BoardEventSetter {
     addPreview({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let { x, y } = Util.extractParams({event: e})
+        let { x, y } = Util.extractParams({ event: e });
         let ship = board.shipyard.ships[0];
         let cols = Util.getColumns({ board, ship, x, y });
 
         if (board.canPlace({ ship, x, y })) {
-            cols.forEach((c) => {
-                Util.setPreviewValidCSS({ column: c });
+            cols.forEach((column) => {
+                Util.setCSSKlasses({
+                    column,
+                    adds: ["preview-valid"],
+                    removes: ["preview-invalid"],
+                });
             });
         } else {
-            cols.forEach((c) => {
-                Util.setPreviewInvalidCSS({ column: c });
+            cols.forEach((column) => {
+                Util.setCSSKlasses({
+                    column,
+                    adds: ["preview-invalid"],
+                    removes: ["preview-valid"],
+                });
             });
         }
     }
@@ -44,7 +52,7 @@ export class BoardEventSetter {
     placeShip({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let {x,y} = Util.extractParams({event:e})
+        let { x, y } = Util.extractParams({ event: e });
         let ship = board.shipyard.ships[0];
 
         if (!board.canPlace({ ship, x, y })) return;
@@ -54,15 +62,21 @@ export class BoardEventSetter {
         Util.updateShipCSS({ board });
     }
 
-    // WORK_ON_PROGRESS
-    // addReceiveAttackEvent({ board, opponentBoard }) {
-    //     board.dom.addEventListener("click", (e) => {
-    //         // Opponent hasn't place all their ships, game hasn't begin
-    //         if (!opponentBoard.shipyard.isEmpty()) return;
+    addReceiveAttackEvent({ board, opponentBoard }) {
+        board.dom.addEventListener("click", (e) => {
+            // Opponent hasn't place all their ships, game hasn't begin
+            if (!opponentBoard.shipyard.isEmpty()) return;
 
-    //         let col = e.target;
-    //     });
-    // }
+            let { column, x, y } = Util.extractParams({ event: e });
+
+            if (board.receiveAttack({ x, y })) {
+                Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
+            } else {
+                Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
+                // Util.incrementMissedCount({board})
+            }
+        });
+    }
 
     // TODO: addHumanAttackEvent;
     // TODO: addComputerAttackEvent
