@@ -83,4 +83,11 @@ export class BoardEvent {
             }
         });
     }
+
+    // Disables the pointer events of boards inside the DOM, effectively disable all the
+    // board events.
+    static disableBoardEvents() {
+        const boards = document.querySelectorAll(".boards");
+        boards.forEach((b) => (b.style.pointerEvents = "none"));
+    }
 }
