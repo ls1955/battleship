@@ -61,7 +61,7 @@ export class Util {
         return { column, x, y };
     }
 
-    // Sets columns' CSS (DOMs) in board as ship if occupy by ship.
+    // Sets .ship class to column if occupy by ship, else remove it.
     static updateShipCSS({ board }) {
         board.grid.forEach((row, y) => {
             row.forEach((col, x) => {
@@ -74,6 +74,7 @@ export class Util {
         });
     }
 
+    // Increments the missed count counter that have same parent with board DOM.
     static incrementMissedCount({ board }) {
         // Select the counter that is located under same parent
         const counter = board.dom.parentNode.querySelector(".missed-counter");
