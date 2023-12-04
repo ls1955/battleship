@@ -36,6 +36,7 @@ compController.placeShips({ board: compBrd });
 let setter = new BoardEventSetter();
 setter.addPreviewShipEvent({ board: humanBrd });
 setter.addPlaceShipEvent({ board: humanBrd });
+setter.addReceiveAttackEvent({board: compBrd, opponentBoard: humanBrd})
 
 // TODO: Add human attack event (that probably instruct computer player to attack immediately
 // afterward?)
