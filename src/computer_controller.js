@@ -22,6 +22,7 @@ export class ComputerController {
             Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
         } else {
             Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
+            Util.incrementMissedCount({ board });
         }
     }
 }
