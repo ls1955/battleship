@@ -1,9 +1,9 @@
-import { ComputerPlayer } from "./src/computer_player.js";
+import { BoardEvent } from "./src/board_event.js";
 import { ComputerController } from "./src/computer_controller.js";
+import { ComputerPlayer } from "./src/computer_player.js";
 import { Gameboard } from "./src/gameboard.js";
-import { BoardEventSetter } from "./src/board_event_setter.js";
-import { Shipyard } from "./src/shipyard.js";
 import { Ship } from "./src/ship.js";
+import { Shipyard } from "./src/shipyard.js";
 import { Util } from "./src/dom_util.js";
 
 // Hardcode the ship lengths for both player, modify this to your desired lengths.
@@ -33,13 +33,10 @@ let compController = new ComputerController({ computerPlayer: comp });
 compController.placeShips({ board: compBrd });
 
 // Setup various board events (human side)...
-let setter = new BoardEventSetter();
-setter.addPreviewShipEvent({ board: humanBrd });
-setter.addPlaceShipEvent({ board: humanBrd });
-setter.addReceiveAttackEvent({
+BoardEvent.addPreviewShipEvent({ board: humanBrd });
+BoardEvent.addPlaceShipEvent({ board: humanBrd });
+BoardEvent.addReceiveAttackEvent({
     board: compBrd,
     opponentBoard: humanBrd,
     compController,
 });
-
-// TODO: Perhaps have a BattleShip class that keep track of various game status?
