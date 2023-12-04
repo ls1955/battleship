@@ -11,8 +11,15 @@ const shipLengths = [5, 4, 4, 3, 2, 2];
 
 let humanBrd = new Gameboard();
 let compBrd = new Gameboard();
+
+// Setup the dom representations for both board, they will be use when setting up DOM events.
 humanBrd.dom = document.querySelector(".human-board");
 compBrd.dom = document.querySelector(".computer-board");
+
+// Setup the name for both board, they will be use when announcing winner name.
+// Override them to your desire name.
+humanBrd.name = "Human";
+compBrd.name = "Computer";
 
 let ships = shipLengths.map((length) => new Ship({ length }));
 humanBrd.shipyard = new Shipyard({ ships });
@@ -40,3 +47,6 @@ BoardEvent.addReceiveAttackEvent({
     opponentBoard: humanBrd,
     compController,
 });
+
+// TODO: Revive the shuffle button
+// Have another BoardEvent or another thing that shows the winner?
