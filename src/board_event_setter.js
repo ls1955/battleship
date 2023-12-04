@@ -62,8 +62,9 @@ export class BoardEventSetter {
         Util.updateShipCSS({ board });
     }
 
-    // Adds receive attack event to the board.
-    // TODO: Include a computer controller that attack the opponentBoard.
+    // Adds a receive attack event to the board. For current implementation,
+    // it accepts a compController for computer player to attack the opponentBoard
+    // (note that the board param in this context is computer player's board)
     addReceiveAttackEvent({ board, opponentBoard, compController }) {
         board.dom.addEventListener("click", (e) => {
             // Opponent hasn't place all their ships, game hasn't begin
@@ -71,7 +72,7 @@ export class BoardEventSetter {
 
             let { column, x, y } = Util.extractParams({ event: e });
 
-            if (board.hadAttack({x, y})) return;
+            if (board.hadAttack({ x, y })) return;
 
             if (board.receiveAttack({ x, y })) {
                 Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
