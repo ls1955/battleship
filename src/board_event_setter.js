@@ -64,20 +64,21 @@ export class BoardEventSetter {
 
     // Adds receive attack event to the board.
     // TODO: Include a computer controller that attack the opponentBoard.
-    addReceiveAttackEvent({ board, opponentBoard }) {
+    addReceiveAttackEvent({ board, opponentBoard, compController }) {
         board.dom.addEventListener("click", (e) => {
             // Opponent hasn't place all their ships, game hasn't begin
             if (!opponentBoard.shipyard.isEmpty()) return;
 
             let { column, x, y } = Util.extractParams({ event: e });
 
+            if (board.hadAttack({x, y})) return;
+
             if (board.receiveAttack({ x, y })) {
                 Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
-                // Should let player keep on attacking...
             } else {
                 Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
                 Util.incrementMissedCount({ board });
-                // TODO: Let the computer player attack?
+                compController.attack({ board: opponentBoard });
             }
         });
     }
