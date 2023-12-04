@@ -14,10 +14,12 @@ export class Gameboard {
 
         // These instance variables will be set from outside, since it seems like JS does not
         // support keyword arguments with default value, and author does not feel like using
-        // usual parameter mode.
+        // usual parameter mode
         this.dom = null;
         // The shipyard that holds the ships
         this.shipyard = null;
+        // The name for gameboard, use when announcing winner
+        this.name = null;
     }
 
     place({ ship, x, y }) {
