@@ -1,4 +1,4 @@
-import { DOMUtil } from "./dom_util.js";
+import { DOMUtil } from "./dom_util";
 
 // The person in charge between the computer player and the DOM.
 export class ComputerController {

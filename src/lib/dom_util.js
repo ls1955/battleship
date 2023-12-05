@@ -1,5 +1,5 @@
-import { Gameboard } from "./gameboard.js";
-import { Ship } from "./ship.js";
+import { Gameboard } from "./gameboard";
+import { Ship } from "./ship";
 
 // A collections of static methods that deal with DOM element and CSS.
 export class DOMUtil {

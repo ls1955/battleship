@@ -1,10 +1,10 @@
-import { BoardEvent } from "./src/lib/board_event.js";
-import { ComputerController } from "./src/lib/computer_controller.js";
-import { ComputerPlayer } from "./src/lib/computer_player.js";
-import { Gameboard } from "./src/lib/gameboard.js";
-import { Ship } from "./src/lib/ship.js";
-import { Shipyard } from "./src/lib/shipyard.js";
-import { DOMUtil } from "./src/lib/dom_util.js";
+import { BoardEvent } from "./lib/board_event";
+import { ComputerController } from "./lib/computer_controller";
+import { ComputerPlayer } from "./lib/computer_player";
+import { Gameboard } from "./lib/gameboard";
+import { Ship } from "./lib/ship";
+import { Shipyard } from "./lib/shipyard";
+import { DOMUtil } from "./lib/dom_util";
 
 // Ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];
@@ -54,4 +54,4 @@ BoardEvent.addReceiveAttackEvent({
 
 // Add the reload event on reloadButton that could be activate after the game end...
 const reloadButton = document.querySelector(".reload-button");
-Util.addReloadEvent({ reloadButton });
+DOMUtil.addReloadEvent({ reloadButton });

@@ -1,4 +1,4 @@
-import { DOMUtil } from "./dom_util.js";
+import { DOMUtil } from "./dom_util";
 
 export class BoardEvent {
     // Adds the preview ship event to the board.
