@@ -84,7 +84,7 @@ export class Util {
     // Disables the pointer events of boards inside the DOM, effectively disable all the
     // board events.
     static disableBoardEvents() {
-        const boards = document.querySelectorAll(".boards");
+        const boards = document.querySelectorAll(".board");
         boards.forEach((b) => (b.style.pointerEvents = "none"));
     }
 
