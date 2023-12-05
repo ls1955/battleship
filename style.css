@@ -59,7 +59,8 @@ body {
     font-size: 0.8rem;
 }
 
-.shuffle-button {
+.replay-button {
+    display: none;
     cursor: pointer;
     font-size: 1.5rem;
     padding: 5px;

@@ -6,7 +6,7 @@ import { Ship } from "./src/ship.js";
 import { Shipyard } from "./src/shipyard.js";
 import { Util } from "./src/dom_util.js";
 
-// Hardcode the ship lengths for both player, modify this to your desired lengths.
+// Ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];
 
 let humanBrd = new Gameboard();
@@ -52,4 +52,6 @@ BoardEvent.addReceiveAttackEvent({
     compController,
 });
 
-// TODO: Revive the shuffle button
+// Add the reload event on replayButton that could be activate after the game end...
+const replayButton = document.querySelector(".replay-button");
+Util.addReloadEvent({ replayButton });
