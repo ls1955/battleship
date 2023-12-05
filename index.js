@@ -37,7 +37,10 @@ let comp = new ComputerPlayer({
     boardWidth: Gameboard.Width,
     boardHeight: Gameboard.Height,
 });
-let compController = new ComputerController({ computerPlayer: comp });
+let compController = new ComputerController({
+    computerPlayer: comp,
+    computerBoard: compBrd,
+});
 compController.placeShips({ board: compBrd });
 
 // Setup various board events...
@@ -50,4 +53,3 @@ BoardEvent.addReceiveAttackEvent({
 });
 
 // TODO: Revive the shuffle button
-// Have another BoardEvent or another thing that shows the winner?
