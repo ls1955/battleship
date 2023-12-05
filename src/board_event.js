@@ -76,24 +76,16 @@ export class BoardEvent {
 
             if (board.receiveAttack({ x, y })) {
                 Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
+
+                if (board.isAllShipSunk()) {
+                    Util.disableBoardEvents();
+                    Util.showWinner({ board: opponentBoard });
+                }
             } else {
                 Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
                 Util.incrementMissedCount({ board });
-                compController.attack({ board: opponentBoard });
+                compController.attack({ board: opponentBoard, ownBoard: board });
             }
         });
-    }
-
-    // Disables the pointer events of boards inside the DOM, effectively disable all the
-    // board events.
-    static disableBoardEvents() {
-        const boards = document.querySelectorAll(".boards");
-        boards.forEach((b) => (b.style.pointerEvents = "none"));
-    }
-
-    // Announces the name of winner in the banner.
-    static showWinner({ board }) {
-        const banner = document.querySelector(".banner");
-        banner.textContent = `The winner is: ${board.name}`;
     }
 }

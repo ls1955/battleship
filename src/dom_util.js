@@ -80,4 +80,17 @@ export class Util {
         counter.count = (counter.count || 0) + 1;
         counter.textContent = `Missed: ${counter.count}`;
     }
+
+    // Disables the pointer events of boards inside the DOM, effectively disable all the
+    // board events.
+    static disableBoardEvents() {
+        const boards = document.querySelectorAll(".boards");
+        boards.forEach((b) => (b.style.pointerEvents = "none"));
+    }
+
+    // Announces the name of winner in the banner.
+    static showWinner({ board }) {
+        const banner = document.querySelector(".banner");
+        banner.textContent = `The winner is: ${board.name}`;
+    }
 }
