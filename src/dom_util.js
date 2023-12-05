@@ -2,7 +2,7 @@ import { Gameboard } from "./gameboard.js";
 import { Ship } from "./ship.js";
 
 // A collections of static methods that deal with DOM element and CSS.
-export class Util {
+export class DOMUtil {
     // Populates the board (DOM) with rows and columns (DOMs).
     static populate({ board }) {
         for (let y = 0; y < Gameboard.Height; y++) {

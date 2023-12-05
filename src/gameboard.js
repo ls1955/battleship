@@ -18,7 +18,7 @@ export class Gameboard {
         // the Battleship game itself and the DOM manipulation.
         //
         // The dom representation of gameboard. Usually is a div. Use heavily
-        // by BoardEvent and Util, where gameboard itself is passed into their
+        // by BoardEvent and DOMUtil, where gameboard itself is passed into their
         // functions, and the dom is manipulate within.
         this.dom = null;
         // The shipyard that holds the ships

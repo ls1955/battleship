@@ -1,4 +1,4 @@
-import { Util } from "./dom_util.js";
+import { DOMUtil } from "./dom_util.js";
 
 // The person in charge between the computer player and the DOM.
 export class ComputerController {
@@ -10,7 +10,7 @@ export class ComputerController {
     // Lets computer player placed its ships, then update the board's CSS.
     placeShips({ board }) {
         this.computerPlayer.placeShips({ board });
-        Util.updateShipCSS({ board });
+        DOMUtil.updateShipCSS({ board });
     }
 
     // Attack the *board* by getting coordinate from computer player.
@@ -18,17 +18,17 @@ export class ComputerController {
     attack({ board }) {
         let [x, y] = this.computerPlayer.nextAtkCoordinate();
 
-        let column = Util.getColumn({ board, x, y });
+        let column = DOMUtil.getColumn({ board, x, y });
         if (board.receiveAttack({ x, y })) {
-            Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
+            DOMUtil.setCSSKlasses({ column, adds: ["hit"], removes: [] });
 
             if (board.isAllShipSunk()) {
-                Util.disableBoardEvents();
-                Util.showWinner({ board: this.computerBoard });
+                DOMUtil.disableBoardEvents();
+                DOMUtil.showWinner({ board: this.computerBoard });
             }
         } else {
-            Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
-            Util.incrementMissedCount({ board });
+            DOMUtil.setCSSKlasses({ column, adds: ["miss"], removes: [] });
+            DOMUtil.incrementMissedCount({ board });
         }
     }
 }
