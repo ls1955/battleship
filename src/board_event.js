@@ -90,4 +90,10 @@ export class BoardEvent {
         const boards = document.querySelectorAll(".boards");
         boards.forEach((b) => (b.style.pointerEvents = "none"));
     }
+
+    // Announces the name of winner in the banner.
+    static showWinner({ board }) {
+        const banner = document.querySelector(".banner");
+        banner.textContent = `The winner is: ${board.name}`;
+    }
 }
