@@ -6,6 +6,8 @@ import { Ship } from "./lib/ship";
 import { Shipyard } from "./lib/shipyard";
 import { DOMUtil } from "./lib/dom_util";
 
+import "./style.css";
+
 // Ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];
 
