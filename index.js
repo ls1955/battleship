@@ -52,6 +52,6 @@ BoardEvent.addReceiveAttackEvent({
     compController,
 });
 
-// Add the reload event on replayButton that could be activate after the game end...
-const replayButton = document.querySelector(".replay-button");
-Util.addReloadEvent({ replayButton });
+// Add the reload event on reloadButton that could be activate after the game end...
+const reloadButton = document.querySelector(".reload-button");
+Util.addReloadEvent({ reloadButton });

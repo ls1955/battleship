@@ -59,7 +59,7 @@ body {
     font-size: 0.8rem;
 }
 
-.replay-button {
+.reload-button {
     display: none;
     cursor: pointer;
     font-size: 1.5rem;
