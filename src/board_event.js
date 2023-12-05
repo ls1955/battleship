@@ -72,6 +72,8 @@ export class BoardEvent {
 
             let { column, x, y } = Util.extractParams({ event: e });
 
+            // BUG?: Quite rarely x and y are NaN
+
             if (board.hadAttack({ x, y })) return;
 
             if (board.receiveAttack({ x, y })) {
@@ -84,7 +86,7 @@ export class BoardEvent {
             } else {
                 Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
                 Util.incrementMissedCount({ board });
-                compController.attack({ board: opponentBoard, ownBoard: board });
+                compController.attack({ board: opponentBoard });
             }
         });
     }
