@@ -12,9 +12,14 @@ export class Gameboard {
             this.grid.push(Array.from({ length: Gameboard.Width }, () => null));
         }
 
-        // These instance variables will be set from outside, since it seems like JS does not
-        // support keyword arguments with default value, and author does not feel like using
-        // usual parameter mode
+        //
+        // These instance variables will be set from outside, as gameboard is fully
+        // functional without them. They are require to be set only when dealing with
+        // the Battleship game itself and the DOM manipulation.
+        //
+        // The dom representation of gameboard. Usually is a div. Use heavily
+        // by BoardEvent and Util, where gameboard itself is passed into their
+        // functions, and the dom is manipulate within.
         this.dom = null;
         // The shipyard that holds the ships
         this.shipyard = null;
