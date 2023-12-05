@@ -1,5 +1,5 @@
-import { Gameboard } from "../src/gameboard";
-import { Ship } from "../src/ship";
+import { Gameboard } from "../src/lib/gameboard";
+import { Ship } from "../src/lib/ship";
 
 describe("Gameboard", () => {
     let board = null;

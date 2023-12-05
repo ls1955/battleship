@@ -1,5 +1,5 @@
-import { Ship } from "../src/ship";
-import { Shipyard } from "../src/shipyard";
+import { Ship } from "../src/lib/ship";
+import { Shipyard } from "../src/lib/shipyard";
 
 describe("Shipyard", () => {
     const ShipLengths = [5, 4, 4, 3, 3, 2, 2];

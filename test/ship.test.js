@@ -1,4 +1,4 @@
-import { Ship } from "../src/ship";
+import { Ship } from "../src/lib/ship";
 
 describe("Ship", () => {
     let ship = null;

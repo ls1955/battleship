@@ -1,10 +1,10 @@
-import { BoardEvent } from "./src/board_event.js";
-import { ComputerController } from "./src/computer_controller.js";
-import { ComputerPlayer } from "./src/computer_player.js";
-import { Gameboard } from "./src/gameboard.js";
-import { Ship } from "./src/ship.js";
-import { Shipyard } from "./src/shipyard.js";
-import { DOMUtil } from "./src/dom_util.js";
+import { BoardEvent } from "./src/lib/board_event.js";
+import { ComputerController } from "./src/lib/computer_controller.js";
+import { ComputerPlayer } from "./src/lib/computer_player.js";
+import { Gameboard } from "./src/lib/gameboard.js";
+import { Ship } from "./src/lib/ship.js";
+import { Shipyard } from "./src/lib/shipyard.js";
+import { DOMUtil } from "./src/lib/dom_util.js";
 
 // Ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];

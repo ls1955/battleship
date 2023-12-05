@@ -1,4 +1,4 @@
-import { ComputerPlayer } from "../src/computer_player";
+import { ComputerPlayer } from "../src/lib/computer_player";
 
 describe("ComputerPlayer", () => {
     describe("#nextAtkCoordinate", () => {
