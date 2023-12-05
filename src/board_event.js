@@ -1,15 +1,15 @@
-import { Util } from "./dom_util.js";
+import { DOMUtil } from "./dom_util.js";
 
 export class BoardEvent {
     // Adds the preview ship event to the board.
     static addPreviewShipEvent({ board }) {
         board.dom.addEventListener("mouseover", (e) => {
-            Util.clearPreviewCSS({ board });
+            DOMUtil.clearPreviewCSS({ board });
             this.addPreview({ board, e });
         });
 
         board.dom.addEventListener("mouseleave", () => {
-            Util.clearPreviewCSS({ board });
+            DOMUtil.clearPreviewCSS({ board });
         });
     }
 
@@ -17,13 +17,13 @@ export class BoardEvent {
     static addPreview({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let { x, y } = Util.extractParams({ event: e });
+        let { x, y } = DOMUtil.extractParams({ event: e });
         let ship = board.shipyard.ships[0];
-        let cols = Util.getColumns({ board, ship, x, y });
+        let cols = DOMUtil.getColumns({ board, ship, x, y });
 
         if (board.canPlace({ ship, x, y })) {
             cols.forEach((column) => {
-                Util.setCSSKlasses({
+                DOMUtil.setCSSKlasses({
                     column,
                     adds: ["preview-valid"],
                     removes: ["preview-invalid"],
@@ -31,7 +31,7 @@ export class BoardEvent {
             });
         } else {
             cols.forEach((column) => {
-                Util.setCSSKlasses({
+                DOMUtil.setCSSKlasses({
                     column,
                     adds: ["preview-invalid"],
                     removes: ["preview-valid"],
@@ -52,14 +52,14 @@ export class BoardEvent {
     static placeShip({ board, e }) {
         if (board.shipyard.isEmpty()) return;
 
-        let { x, y } = Util.extractParams({ event: e });
+        let { x, y } = DOMUtil.extractParams({ event: e });
         let ship = board.shipyard.ships[0];
 
         if (!board.canPlace({ ship, x, y })) return;
 
         board.shipyard.shift();
         board.place({ ship, x, y });
-        Util.updateShipCSS({ board });
+        DOMUtil.updateShipCSS({ board });
     }
 
     // Adds a receive attack event to the board. For current implementation,
@@ -70,22 +70,22 @@ export class BoardEvent {
             // Opponent hasn't place all their ships, game hasn't begin
             if (!opponentBoard.shipyard.isEmpty()) return;
 
-            let { column, x, y } = Util.extractParams({ event: e });
+            let { column, x, y } = DOMUtil.extractParams({ event: e });
 
             // BUG?: Quite rarely x and y are NaN
 
             if (board.hadAttack({ x, y })) return;
 
             if (board.receiveAttack({ x, y })) {
-                Util.setCSSKlasses({ column, adds: ["hit"], removes: [] });
+                DOMUtil.setCSSKlasses({ column, adds: ["hit"], removes: [] });
 
                 if (board.isAllShipSunk()) {
-                    Util.disableBoardEvents();
-                    Util.showWinner({ board: opponentBoard });
+                    DOMUtil.disableBoardEvents();
+                    DOMUtil.showWinner({ board: opponentBoard });
                 }
             } else {
-                Util.setCSSKlasses({ column, adds: ["miss"], removes: [] });
-                Util.incrementMissedCount({ board });
+                DOMUtil.setCSSKlasses({ column, adds: ["miss"], removes: [] });
+                DOMUtil.incrementMissedCount({ board });
                 compController.attack({ board: opponentBoard });
             }
         });

@@ -4,7 +4,7 @@ import { ComputerPlayer } from "./src/computer_player.js";
 import { Gameboard } from "./src/gameboard.js";
 import { Ship } from "./src/ship.js";
 import { Shipyard } from "./src/shipyard.js";
-import { Util } from "./src/dom_util.js";
+import { DOMUtil } from "./src/dom_util.js";
 
 // Ship lengths for both player, modify this to your desired lengths.
 const shipLengths = [5, 4, 4, 3, 2, 2];
@@ -30,7 +30,7 @@ ships = shipLengths.map((length) => new Ship({ length }));
 compBrd.shipyard = new Shipyard({ ships });
 
 // Populate the boards with rows and columns in DOM...
-[humanBrd, compBrd].forEach((board) => Util.populate({ board }));
+[humanBrd, compBrd].forEach((board) => DOMUtil.populate({ board }));
 
 // Let computer player place their ships...
 let comp = new ComputerPlayer({
