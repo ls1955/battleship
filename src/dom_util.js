@@ -88,9 +88,16 @@ export class Util {
         boards.forEach((b) => (b.style.pointerEvents = "none"));
     }
 
-    // Announces the name of winner in the banner.
+    // Announces the name of winner in the banner and shows the reply button.
     static showWinner({ board }) {
         const banner = document.querySelector(".banner");
         banner.textContent = `The winner is: ${board.name}`;
+        const replayButton = document.querySelector(".replay-button");
+        replayButton.style.display = "block";
+    }
+
+    // Adds a click event on replayButton that reload the page to start a new game.
+    static addReloadEvent({ replayButton }) {
+        replayButton.addEventListener("click", () => location.reload());
     }
 }
