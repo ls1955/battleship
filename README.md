@@ -1,8 +1,8 @@
 # Battleship
-This project is part of [The Odin Project's curriculum](https://www.theodinproject.com/lessons/javascript-battleship).
+This project is part of [The Odin Project's curriculum](https://www.theodinproject.com/lessons/javascript-battleship). View it live at [here](https://ls1955.github.io/battleship/).
 
-# Getting Started
-After cloning the repo:
+# Getting started
+To run the app locally, first clone the repo, then:
 ```bash
 npm run install
 npm run start
