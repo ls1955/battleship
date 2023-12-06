@@ -13,3 +13,8 @@ Now the app should be visible at localhost:8080
 ```bash
 npm run test
 ```
+
+# Further improvement?
+* Make the computer player smarter
+* Allow computer player to keep on attacking after it hits the ship
+* Prevent ships from being placed adjacent to each other
